@@ -574,7 +574,7 @@
             lineasTexto.forEach(l => { ctx.fillText(l, canvas.width / 2, yNombre); yNombre += 32; });
 
             const precioFinal = pData.precioRegular * (1 - pctDescuento / 100);
-            const wBox = 320, hBox = 100, xBox = (canvas.width - wBox) / 2, yBox = 675;
+            const wBox = 320, hBox = 130, xBox = (canvas.width - wBox) / 2, yBox = 650;
 
             ctx.fillStyle = "#77c210";
             ctx.beginPath();
@@ -586,16 +586,16 @@
             ctx.textAlign = "center";
             ctx.fillText("PRECIO FINAL", canvas.width / 2, yBox + 26);
 
-            let fontSize = 54;
+            let fontSize = 75;
             const textoPrecio = "$" + formatearPrecio(precioFinal);
             if (textoPrecio.length > 8) fontSize = 42;
             ctx.font = `900 ${fontSize}px sans-serif`;
-            ctx.fillText(textoPrecio, canvas.width / 2, yBox + 78);
+            ctx.fillText(textoPrecio, canvas.width / 2, yBox + 95);
 
-            ctx.fillStyle = "#52525b";
+            ctx.fillStyle = "#000000";
             ctx.font = "bold 20px sans-serif";
             ctx.textAlign = "center";
-            ctx.fillText("Precio Regular: $" + formatearPrecio(pData.precioRegular), canvas.width / 2, yBox + hBox + 32);
+            ctx.fillText("Precio Regular: $" + formatearPrecio(pData.precioRegular), canvas.width / 2, yBox + hBox + 24);
 
             const wPill = 710, hPill = 80, xPill = (canvas.width - wPill) / 2, yPill = 855;
             ctx.fillStyle = "#77c210";
@@ -713,7 +713,7 @@
             lineasTexto.forEach(l => { ctx.fillText(l, canvas.width / 2, yNombre); yNombre += 32; });
 
             const precioFinal = pData.precioRegular * (1 - pctDescuento / 100);
-            const wBox = 320, hBox = 100, xBox = (canvas.width - wBox) / 2, yBox = 675;
+            const wBox = 320, hBox = 130, xBox = (canvas.width - wBox) / 2, yBox = 650;
 
             ctx.fillStyle = "#ffde00";
             ctx.beginPath();
@@ -725,12 +725,12 @@
             ctx.textAlign = "center";
             ctx.fillText("PRECIO FINAL", canvas.width / 2, yBox + 26);
 
-            let fontSize = 54;
+            let fontSize = 78;
             const textoPrecio = "$" + formatearPrecio(precioFinal);
             if (textoPrecio.length > 8) fontSize = 42;
             ctx.font = `900 ${fontSize}px sans-serif`;
             ctx.fillStyle = "#02214d";
-            ctx.fillText(textoPrecio, canvas.width / 2, yBox + 78);
+            ctx.fillText(textoPrecio, canvas.width / 2, yBox + 95);
 
             ctx.fillStyle = "#000000";
             ctx.font = "bold 20px sans-serif";
@@ -854,7 +854,8 @@
             lineasTexto.forEach(l => { ctx.fillText(l, canvas.width / 2, yNombre); yNombre += 32; });
 
             const precioFinal = pData.precioRegular * (1 - pctDescuento / 100);
-            const wBox = 320, hBox = 100, xBox = (canvas.width - wBox) / 2, yBox = 675;
+            const wBox = 320, hBox = 130, xBox = (canvas.width - wBox) / 2, yBox = 650;
+
 
             // Caja de precio adaptada a la estética del banner de Viernes (ej. tono rojo/vibrante)
             ctx.fillStyle = "#e11d48";
@@ -867,11 +868,11 @@
             ctx.textAlign = "center";
             ctx.fillText("PRECIO FINAL", canvas.width / 2, yBox + 26);
 
-            let fontSize = 54;
+            let fontSize = 75;
             const textoPrecio = "$" + formatearPrecio(precioFinal);
             if (textoPrecio.length > 8) fontSize = 42;
             ctx.font = `900 ${fontSize}px sans-serif`;
-            ctx.fillText(textoPrecio, canvas.width / 2, yBox + 78);
+            ctx.fillText(textoPrecio, canvas.width / 2, yBox + 95);
 
             ctx.fillStyle = "#000000";
             ctx.font = "bold 20px sans-serif";
@@ -997,7 +998,7 @@
             lineasTexto.forEach(l => { ctx.fillText(l, canvas.width / 2, yNombre); yNombre += 32; });
 
             const precioFinal = pData.precioRegular * (1 - pctDescuento / 100);
-            const wBox = 320, hBox = 100, xBox = (canvas.width - wBox) / 2, yBox = 675;
+            const wBox = 320, hBox = 130, xBox = (canvas.width - wBox) / 2, yBox = 650;
 
             // Caja de precio adaptada a la estética del banner de Viernes (ej. tono rojo/vibrante)
             ctx.fillStyle = "#e11d48";
@@ -1010,11 +1011,11 @@
             ctx.textAlign = "center";
             ctx.fillText("PRECIO FINAL", canvas.width / 2, yBox + 26);
 
-            let fontSize = 54;
+            let fontSize = 78;
             const textoPrecio = "$" + formatearPrecio(precioFinal);
             if (textoPrecio.length > 8) fontSize = 42;
             ctx.font = `900 ${fontSize}px sans-serif`;
-            ctx.fillText(textoPrecio, canvas.width / 2, yBox + 78);
+            ctx.fillText(textoPrecio, canvas.width / 2, yBox + 95);
 
             ctx.fillStyle = "#000000";
             ctx.font = "bold 20px sans-serif";
