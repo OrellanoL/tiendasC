@@ -204,7 +204,7 @@
 
     <div class="card no-print">
         <div>
-            <h1>🛒 Generador de Cartelería para Tiendas C - </h1>
+            <h1>🛒 Generador de Cartelería para Tiendas C</h1>
         </div>
         <p class="subtitle">Catálogo sincronizado desde GitHub en tiempo real · Código creado por Ludmila · Plantillas adaptadas por Alan</p>
 
@@ -246,8 +246,7 @@
 
         <div class="scanned-list" id="listaEscaneados"></div>
 
-
-<div class="flex-gap" style="margin-top: 20px;">
+        <div class="flex-gap" style="margin-top: 20px;">
             <button class="btn-calc-miercoles" onclick="generarCartelesMiercoles()">⚡ Miércoles</button>
             <button class="btn-calc-jueves" onclick="generarCartelesJueves()">⚡ Jueves</button>
             <button class="btn-calc-viernes" onclick="generarCartelesViernes()">⚡ Viernes</button>
@@ -272,16 +271,11 @@
         const URL_BANNER_VIERNES = 'https://raw.githubusercontent.com/OrellanoL/ProductosCatalogo/main/viernes.jpg';
         const URL_BANNER_SABADOYDOMINGO = 'https://raw.githubusercontent.com/OrellanoL/ProductosCatalogo/main/sabadoydomingo.jpg';
 
-
         const URL_COMPRA_SUPERIOR_M = 'https://raw.githubusercontent.com/OrellanoL/ProductosCatalogo/main/comprasuperior.png';
         const URL_COMPRA_SUPERIOR_MP = 'https://raw.githubusercontent.com/OrellanoL/ProductosCatalogo/main/comprasuperiormp.png';
         const URL_MP = 'https://raw.githubusercontent.com/OrellanoL/ProductosCatalogo/main/mplogo.png';
         const URL_CUENTA_DIGITAL_LOGO = 'https://raw.githubusercontent.com/OrellanoL/ProductosCatalogo/main/cuentadigitallogo.jpg';
         const URL_COMPRA_SUPERIOR_CUENTADIGITAL = 'https://raw.githubusercontent.com/OrellanoL/ProductosCatalogo/main/comprasuperiorcuentadigital.png';
-
-        
-
-
 
         let catalogoProductos = {}; 
         let listaCatalogoArreglo = [];
@@ -468,9 +462,25 @@
                 if (!p.copias) p.copias = 1;
                 html += `
                     <div class="item-row">
-                        <div class="item-info"><strong>${p.producto}</strong><span>Precio: $${p.precioRegular} | EAN: ${p.ean}</span></div>
-                        <label style="font-size: 0.8rem;">Copias: <input type="number" min="1" max="20" style="width: 60px; text-align: center; padding: 4px;" value="${p.copias}" onchange="productosSeleccionados[${idx}].copias = parseInt(this.value) || 1; guardarListaEnStorage();"></label>
-                        <button class="btn-danger" onclick="productosSeleccionados.splice(${idx},1); guardarListaEnStorage(); actualizarListaUI();">✕</button>
+                        <div class="item-info">
+                            <strong>${p.producto}</strong>
+                            <span>EAN: ${p.ean}</span>
+                        </div>
+                        <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+                            <label style="font-size: 0.8rem; margin: 0;">
+                                Precio $: 
+                                <input type="number" min="0" step="1" style="width: 90px; text-align: center; padding: 4px;" 
+                                       value="${p.precioRegular}" 
+                                       onchange="productosSeleccionados[${idx}].precioRegular = parseFloat(this.value) || 0; guardarListaEnStorage();">
+                            </label>
+                            <label style="font-size: 0.8rem; margin: 0;">
+                                Copias: 
+                                <input type="number" min="1" max="20" style="width: 60px; text-align: center; padding: 4px;" 
+                                       value="${p.copias}" 
+                                       onchange="productosSeleccionados[${idx}].copias = parseInt(this.value) || 1; guardarListaEnStorage();">
+                            </label>
+                            <button class="btn-danger" onclick="productosSeleccionados.splice(${idx},1); guardarListaEnStorage(); actualizarListaUI();">✕</button>
+                        </div>
                     </div>
                 `;
             });
@@ -489,7 +499,7 @@
         }
 
         // ==========================================
-        // ⚡ GENERAR MIÉRCOLES (FUNCIÓN INDEPENDIENTE)
+        // ⚡ GENERAR MIÉRCOLES
         // ==========================================
         async function generarCartelesMiercoles() {
             if (productosSeleccionados.length === 0) { alert("No hay productos seleccionados."); return; }
@@ -628,7 +638,7 @@
         }
 
         // ==========================================
-        // ⚡ GENERAR JUEVES (FUNCIÓN INDEPENDIENTE)
+        // ⚡ GENERAR JUEVES
         // ==========================================
         async function generarCartelesJueves() {
             if (productosSeleccionados.length === 0) { alert("No hay productos seleccionados."); return; }
@@ -768,7 +778,7 @@
         }
 
         // ==========================================
-        // ⚡ GENERAR VIERNES (FUNCIÓN INDEPENDIENTE)
+        // ⚡ GENERAR VIERNES
         // ==========================================
         async function generarCartelesViernes() {
             if (productosSeleccionados.length === 0) { alert("No hay productos seleccionados."); return; }
@@ -811,7 +821,6 @@
             ctx.fillStyle = "#ffffff";
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            // Banner Viernes
             if (imgBanner) {
                 const anchoBanner = 650; 
                 const altoBanner = (imgBanner.height / imgBanner.width) * anchoBanner;
@@ -856,8 +865,6 @@
             const precioFinal = pData.precioRegular * (1 - pctDescuento / 100);
             const wBox = 320, hBox = 130, xBox = (canvas.width - wBox) / 2, yBox = 650;
 
-
-            // Caja de precio adaptada a la estética del banner de Viernes (ej. tono rojo/vibrante)
             ctx.fillStyle = "#e11d48";
             ctx.beginPath();
             ctx.roundRect(xBox, yBox, wBox, hBox, 16);
@@ -879,13 +886,10 @@
             ctx.textAlign = "center";
             ctx.fillText("Precio Regular: $" + formatearPrecio(pData.precioRegular), canvas.width / 2, yBox + hBox + 20);
 
-            // Pastilla Inferior adaptada a Viernes
             const wPill = 710, hPill = 80, xPill = (canvas.width - wPill) / 2, yPill = 855;
-            
-            // Definimos el gradiente de arriba (yPill) hacia abajo (yPill + hPill) -> 180°
             let gradienteViernes = ctx.createLinearGradient(xPill, yPill, xPill, yPill + hPill);
-            gradienteViernes.addColorStop(0, '#b91c1c'); // Color superior (rojo)
-            gradienteViernes.addColorStop(1, '#4c0519'); // Color inferior (bordó oscuro)
+            gradienteViernes.addColorStop(0, '#b91c1c');
+            gradienteViernes.addColorStop(1, '#4c0519');
 
             ctx.fillStyle = gradienteViernes;
             ctx.beginPath();
@@ -905,25 +909,18 @@
                 const xLogoCdni = xPill + 490;
                 const yLogoCdni = yPill + (hPill - altoLogoCdni) / 2;
 
-                // 1. Recuadro / Fondo de tarjeta blanco contenedor
                 ctx.fillStyle = "#ffffff";
                 ctx.beginPath();
                 ctx.roundRect(xLogoCdni - 8, yLogoCdni - 4, anchoLogoCdni + 16, altoLogoCdni + 8, 10);
                 ctx.fill();
 
-                // 2. Borde sutil opcional (para destacar el marco)
                 ctx.strokeStyle = "rgba(0, 0, 0, 0.1)";
                 ctx.lineWidth = 1;
                 ctx.stroke();
 
-                // 3. Dibujo de la imagen alineada dentro del recuadro
                 ctx.drawImage(imgCdni, xLogoCdni, yLogoCdni, anchoLogoCdni, altoLogoCdni);
             }
-            
-           // if (imgCdni) {
-                //const altoLogoCdni = 78;
-                //ctx.drawImage(imgCdni, xPill + 398, yPill + (hPill - altoLogoCdni) / 2, (imgCdni.width / imgCdni.height) * altoLogoCdni, altoLogoCdni);
-           // }
+
             if (imgCSM) {
                 const altoCSM = 72;
                 ctx.drawImage(imgCSM, xPill + 56, yPill + (hPill - altoCSM) / 2 + 4, (imgCSM.width / imgCSM.height) * altoCSM, altoCSM);
@@ -937,7 +934,33 @@
             return canvas.toDataURL('image/png');
         }
 
-        async function crearCartelSabadoYDomingo(pData) {
+        // ==========================================
+        // ⚡ GENERAR SÁBADO Y DOMINGO
+        // ==========================================
+        async function generarCartelesSabadoYDomingo() {
+            if (productosSeleccionados.length === 0) { alert("No hay productos seleccionados."); return; }
+
+            const previewGrid = document.getElementById('previewGrid');
+            previewGrid.innerHTML = '<p style="grid-column: 1 / -1; text-align: center; font-weight: bold; padding: 20px;">🎨 Generando carteles de Sábado y Domingo...</p>';
+
+            const fragment = document.createDocumentFragment();
+            for (let p of productosSeleccionados) {
+                let urlResult = await crearCartelSabadoYDomingoCanvas(p);
+                if (urlResult) {
+                    const cant = p.copias || 1;
+                    for (let i = 0; i < cant; i++) {
+                        const img = document.createElement('img');
+                        img.src = urlResult;
+                        fragment.appendChild(img);
+                    }
+                }
+            }
+            previewGrid.innerHTML = '';
+            previewGrid.appendChild(fragment);
+            window.scrollTo({ top: previewGrid.offsetTop - 20, behavior: 'smooth' });
+        }
+
+        async function crearCartelSabadoYDomingoCanvas(pData) {
             const canvas = document.createElement('canvas');
             canvas.width = 800; 
             canvas.height = 980;
@@ -955,7 +978,6 @@
             ctx.fillStyle = "#ffffff";
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            // Banner Viernes
             if (imgBanner) {
                 const anchoBanner = 650; 
                 const altoBanner = (imgBanner.height / imgBanner.width) * anchoBanner;
@@ -1000,7 +1022,6 @@
             const precioFinal = pData.precioRegular * (1 - pctDescuento / 100);
             const wBox = 320, hBox = 130, xBox = (canvas.width - wBox) / 2, yBox = 650;
 
-            // Caja de precio adaptada a la estética del banner de Viernes (ej. tono rojo/vibrante)
             ctx.fillStyle = "#e11d48";
             ctx.beginPath();
             ctx.roundRect(xBox, yBox, wBox, hBox, 16);
@@ -1022,13 +1043,10 @@
             ctx.textAlign = "center";
             ctx.fillText("Precio Regular: $" + formatearPrecio(pData.precioRegular), canvas.width / 2, yBox + hBox + 20);
 
-            // Pastilla Inferior adaptada a Viernes
             const wPill = 710, hPill = 80, xPill = (canvas.width - wPill) / 2, yPill = 855;
-            
-            // Definimos el gradiente de arriba (yPill) hacia abajo (yPill + hPill) -> 180°
             let gradienteViernes = ctx.createLinearGradient(xPill, yPill, xPill, yPill + hPill);
-            gradienteViernes.addColorStop(0, '#b91c1c'); // Color superior (rojo)
-            gradienteViernes.addColorStop(1, '#4c0519'); // Color inferior (bordó oscuro)
+            gradienteViernes.addColorStop(0, '#b91c1c');
+            gradienteViernes.addColorStop(1, '#4c0519');
 
             ctx.fillStyle = gradienteViernes;
             ctx.beginPath();
@@ -1048,25 +1066,18 @@
                 const xLogoCdni = xPill + 490;
                 const yLogoCdni = yPill + (hPill - altoLogoCdni) / 2;
 
-                // 1. Recuadro / Fondo de tarjeta blanco contenedor
                 ctx.fillStyle = "#ffffff";
                 ctx.beginPath();
                 ctx.roundRect(xLogoCdni - 8, yLogoCdni - 4, anchoLogoCdni + 16, altoLogoCdni + 8, 10);
                 ctx.fill();
 
-                // 2. Borde sutil opcional (para destacar el marco)
                 ctx.strokeStyle = "rgba(0, 0, 0, 0.1)";
                 ctx.lineWidth = 1;
                 ctx.stroke();
 
-                // 3. Dibujo de la imagen alineada dentro del recuadro
                 ctx.drawImage(imgCdni, xLogoCdni, yLogoCdni, anchoLogoCdni, altoLogoCdni);
             }
-            
-           // if (imgCdni) {
-                //const altoLogoCdni = 78;
-                //ctx.drawImage(imgCdni, xPill + 398, yPill + (hPill - altoLogoCdni) / 2, (imgCdni.width / imgCdni.height) * altoLogoCdni, altoLogoCdni);
-           // }
+
             if (imgCSM) {
                 const altoCSM = 72;
                 ctx.drawImage(imgCSM, xPill + 56, yPill + (hPill - altoCSM) / 2 + 4, (imgCSM.width / imgCSM.height) * altoCSM, altoCSM);
@@ -1080,33 +1091,6 @@
             return canvas.toDataURL('image/png');
         }
 
-        // ==========================================
-        // GENERAR SÁBADO Y DOMINGO
-        // ==========================================
-        async function generarCartelesSabadoYDomingo() {
-            if (productosSeleccionados.length === 0) { alert("No hay productos seleccionados."); return; }
-
-            const previewGrid = document.getElementById('previewGrid');
-            previewGrid.innerHTML = '<p style="grid-column: 1 / -1; text-align: center; font-weight: bold; padding: 20px;">🎨 Generando carteles de Sábado y Domingo...</p>';
-
-            const fragment = document.createDocumentFragment();
-            for (let p of productosSeleccionados) {
-                let urlResult = await crearCartelSabadoYDomingo(p);
-                if (urlResult) {
-                    const cant = p.copias || 1;
-                    for (let i = 0; i < cant; i++) {
-                        const img = document.createElement('img');
-                        img.src = urlResult;
-                        fragment.appendChild(img);
-                    }
-                }
-            }
-            previewGrid.innerHTML = '';
-            previewGrid.appendChild(fragment);
-            window.scrollTo({ top: previewGrid.offsetTop - 20, behavior: 'smooth' });
-        }
-
-
         function imprimirPC() {
             const imagenes = document.querySelectorAll('#previewGrid img');
             if (imagenes.length === 0) { alert("Primero debes generar los carteles."); return; }
@@ -1114,7 +1098,7 @@
             let htmlContenido = `<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><title>Imprimir</title><style>@page { size: A4 portrait; margin: 0; } body { margin: 0; } img { width: 100vw; height: 100vh; object-fit: contain; page-break-after: always; display: block; }</style></head><body>`;
             imagenes.forEach(img => { htmlContenido += `<img src="${img.src}">`; });
             htmlContenido += `</body></html>`;
-            ventanaImpresion.document.write(htmlContenedor = htmlContenido);
+            ventanaImpresion.document.write(htmlContenido);
             ventanaImpresion.document.close();
             setTimeout(() => { ventanaImpresion.focus(); ventanaImpresion.print(); }, 500);
         }
