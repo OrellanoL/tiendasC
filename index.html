@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Generador de Cartelería - Miércoles, Jueves y Viernes</title>
+    <title>Generador de Cartelería - TIENDAS C</title>
     <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
@@ -225,11 +225,17 @@
         <label>Precio Regular ($):</label>
         <input type="number" id="modalInputPrecio" placeholder="0" style="margin-bottom: 12px;">
 
-        <label>Foto del Producto:</label>
-        <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+      <label>Foto del Producto:</label>
+        <div style="display: flex; gap: 8px; margin-bottom: 10px; flex-wrap: wrap;">
             <input type="file" id="modalInputArchivoFoto" accept="image/*" style="display:none;" onchange="cargarFotoDesdeArchivo(this)">
-            <button type="button" class="btn-manual" style="background: #0284c7; flex: 1; font-size: 0.85rem;" onclick="document.getElementById('modalInputArchivoFoto').click()">📁 Galería / Archivo</button>
-            <button type="button" class="btn-manual" style="background: #9333ea; flex: 1; font-size: 0.85rem;" onclick="sacarFotoConCamaraModal()">📸 Usar Cámara</button>
+            <button type="button" class="btn-manual" style="background: #0284c7; flex: 1; font-size: 0.8rem; padding: 8px;" onclick="document.getElementById('modalInputArchivoFoto').click()">📁 Archivo</button>
+            <button type="button" class="btn-manual" style="background: #9333ea; flex: 1; font-size: 0.8rem; padding: 8px;" onclick="sacarFotoConCamaraModal()">📸 Cámara</button>
+            <button type="button" class="btn-manual" style="background: #ea580c; flex: 1; font-size: 0.8rem; padding: 8px;" onclick="buscarFotoEnWebModal()">🌐 Buscar Web</button>
+        </div>
+
+        <!-- Input opcional para pegar la URL de la imagen encontrada en la web -->
+        <div id="modalBoxUrlWeb" style="margin-bottom: 15px; display: none;">
+            <input type="text" id="modalInputUrlWeb" placeholder="Pegá aquí el link de la imagen copiada..." style="font-size: 0.8rem; padding: 6px;" onchange="cargarFotoDesdeUrlWeb(this.value)">
         </div>
 
         <div id="modalPreviewContainer" style="text-align: center; margin-bottom: 15px; display: none;">
@@ -426,6 +432,26 @@
                 agregarProductoPorEan(select.value);
                 select.value = "";
             }
+        }
+       function buscarFotoEnWebModal() {
+            const nombreProd = document.getElementById('modalInputNombre').value.trim();
+            const termino = encodeURIComponent(nombreProd || eanTemporalActual);
+            
+            // Te lleva directo al buscador oficial de Carrefour Argentina con el producto ingresado
+            window.open(`https://www.carrefour.com.ar/${termino}?_q=${termino}&map=ft`, '_blank');
+            
+            // Muestra el input para que pegues el link de la foto que elijas ahí
+            const boxUrl = document.getElementById('modalBoxUrlWeb');
+            boxUrl.style.display = 'block';
+            document.getElementById('modalInputUrlWeb').focus();
+        }
+
+        function cargarFotoDesdeUrlWeb(url) {
+            if (!url) return;
+            fotoBase64Temporal = url.trim();
+            const imgPrev = document.getElementById('modalImgPreview');
+            imgPrev.src = fotoBase64Temporal;
+            document.getElementById('modalPreviewContainer').style.display = 'block';
         }
 
         function buscarEanManual() {
